@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EditwithNamira | Visual Storyteller</title>
+    
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;500;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor" id="cursor"></div>
+
+    <!-- BACKGROUND ANIMATION -->
+    <div id="canvas-container">
+        <canvas id="bgCanvas"></canvas>
+    </div>
+
+    <!-- MOBILE DRAWER OVERLAY -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+
+    <!-- MOBILE SIDE DRAWER MENU -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <a href="#hero" class="mobile-link" onclick="toggleMenu()">Home</a>
+        <a href="#about" class="mobile-link" onclick="toggleMenu()">About</a>
+        <a href="#work" class="mobile-link" onclick="toggleMenu()">Work</a>
+        <a href="#services" class="mobile-link" onclick="toggleMenu()">Services</a>
+        <a href="#reviews" class="mobile-link" onclick="toggleMenu()">Reviews</a>
+        <a href="#contact" class="mobile-link" onclick="toggleMenu()">Contact</a>
+    </div>
+
+    <!-- NAVIGATION BAR (CAPSULE) -->
+    <nav id="main-nav">
+        <!-- Left Side -->
+        <div class="nav-group-desktop">
+            <a href="#hero" class="nav-link interactive-hover">Home</a>
+            <a href="#about" class="nav-link interactive-hover">About</a>
+            <a href="#work" class="nav-link interactive-hover">Work</a>
+        </div>
+        
+        <div class="hamburger-btn interactive-hover" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <!-- Center -->
+        <div class="nav-logo">
+            NAMIRA<span>.</span>
+        </div>
+
+        <!-- Right Side -->
+        <div class="nav-group-desktop">
+            <a href="#services" class="nav-link interactive-hover">Services</a>
+            <a href="#reviews" class="nav-link interactive-hover">Reviews</a>
+            <a href="#contact" class="nav-link interactive-hover">Contact</a>
+        </div>
+
+        <!-- Mobile Avatar -->
+        <img src="assets/profile.jpeg" alt="Namira" class="nav-avatar interactive-hover">
+    </nav>
+
+    <!-- CONTENT - All sections loaded from pages folder -->
+    <main>
+        <!-- Load all sections -->
+        <div id="hero-container"></div>
+        <div id="about-container"></div>
+        <div id="work-container"></div>
+        <div id="services-container"></div>
+        <div id="reviews-container"></div>
+        <div id="contact-container"></div>
+    </main>
+
+    <!-- FOOTER WITH SMOKE TRANSITION -->
+    <footer class="main-footer">
+        <!-- 1. Logo (Top) -->
+        <div class="footer-brand-name">
+            NAMIRA<span>.</span>
+        </div>
+
+        <!-- 2. Social Icons (Middle) -->
+        <div class="footer-socials">
+            <a href="https://github.com/namirasheikh" class="interactive-hover"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/editwith.namira?igsh=eTEwdjI1bjlwaW95" class="interactive-hover"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/namira-sheikh" class="interactive-hover"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="interactive-hover"><i class="fas fa-palette"></i></a>
+            <a href="#" class="interactive-hover"><i class="fab fa-whatsapp"></i></a>
+            <a  href="mailto:namirasheikh301@gmail.com?subject=Project%20Inquiry&body=Hi%20Namira%2C%20I%27m%20interested%20in%20working%20with%20you..." class="interactive-hover"><i class="fas fa-envelope"></i></a>
+        </div>
+
+        <!-- 3. Elegant Divider -->
+        <div class="footer-divider"></div>
+
+        <!-- 4. Copyright (Bottom) -->
+        <div class="footer-copyright">
+            @2026 Namira Sheikh.
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script src="js/main.js"></script>
+    
+    <!-- Load HTML sections using fetch -->
+    <script>
+        // Load all HTML sections
+        async function loadSections() {
+            try {
+                // Load each section
+                const homeResponse = await fetch('pages/home.html');
+                const homeHtml = await homeResponse.text();
+                document.getElementById('hero-container').innerHTML = homeHtml;
+                
+                const aboutResponse = await fetch('pages/about.html');
+                const aboutHtml = await aboutResponse.text();
+                document.getElementById('about-container').innerHTML = aboutHtml;
+                
+                const workResponse = await fetch('pages/work.html');
+                const workHtml = await workResponse.text();
+                document.getElementById('work-container').innerHTML = workHtml;
+                
+                const servicesResponse = await fetch('pages/services.html');
+                const servicesHtml = await servicesResponse.text();
+                document.getElementById('services-container').innerHTML = servicesHtml;
+                
+                const reviewsResponse = await fetch('pages/reviews.html');
+                const reviewsHtml = await reviewsResponse.text();
+                document.getElementById('reviews-container').innerHTML = reviewsHtml;
+                
+                const contactResponse = await fetch('pages/contact.html');
+                const contactHtml = await contactResponse.text();
+                document.getElementById('contact-container').innerHTML = contactHtml;
+                
+                // Re-initialize cursor hover effects and scroll reveal for dynamically loaded content
+                if (typeof initializeDynamicContent === 'function') {
+                    initializeDynamicContent();
+                }
+            } catch (error) {
+                console.error('Error loading sections:', error);
+            }
+        }
+        
+        // Load sections when page loads
+        loadSections();
+    </script>
+
+</body>
+</html>
